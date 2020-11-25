@@ -1,0 +1,140 @@
+
+Data save.train2;
+  set save.train;
+
+  if day_of_week >= 1     	 	               then day_of_week1 = 1; else day_of_week1 = 0;
+
+  **2-6 Is the neutral group
+
+  if point_of_impact =1			                         then point_of_impact1 = 1; else point_of_impact1 = 0;
+  if point_of_impact =2                              then point_of_impact2 =1; else point_of_impact2 = 0; 
+  if point_of_impact =3                              then point_of_impact3 = 1; else point_of_impact3 = 0; 
+  if point_of_impact =4                              then point_of_impact4= 1; else point_of_impact4= 0; 
+
+  **0&1 is the neutral group
+
+  if Day_Mthn >= 5 and Day_Mthn <= 8 		then Day_Mthn1 =1; else Day_Mthn1 = 0;
+  if Day_Mthn >= 9 and Day_Mthn <= 17		then Day_Mthn2 =1; else Day_Mthn2 = 0;
+  if Day_Mthn >= 18      				        then Day_Mthn3 =1; else Day_Mthn3 = 0;
+  if Day_Mthn >= 19 and Day_Mthn <= 20	then Day_Mthn4 =1; else Day_Mthn4 = 0;
+  if Day_Mthn > 20 			                then Day_Mthn5 =1; else Day_Mthn5 = 0;
+
+  **1-4 is the nurtral group
+
+
+  if road_type =1			                         then road_type1 =1; else road_type = 0;
+  if road_type =2                              then road_type2 =1; else road_type = 0; 
+  if road_type =3                              then road_type3 = 1; else road_type = 0; 
+  if road_type =6                              then road_type4 = 1; else road_type = 0; 
+  if road_type =7                              then road_type5 = 1; else road_type = 0; 
+
+  ** 9 is the nuetral group
+
+  if junction_control =1	 		                        then junction_control1 =1; else junction_control1 = 0;
+  if junction_control =2                              then junction_control2 =1; else junction_control2 = 0; 
+  if junction_control =3                              then junction_control3 = 1; else junction_control3 = 0; 
+  if junction_control =4                              then junction_control4= 1; else junction_control4 = 0; 
+
+  **/-1 is the neutral groups/*
+
+  if age_of_vehicle >=1 and age_of_vehicle <=8       then age_of_vehicle1=1; else age_of_vehicle1 = 0;
+  if age_of_vehicle >=9 and age_of_vehicle <= 12      then age_of_vehicle2=1; else age_of_vehicle2 = 0;
+  if age_of_vehicle >=13 and age_of_vehicle <=15      then age_of_vehicle3=1; else age_of_vehicle3 = 0;
+
+  **/-1 is the neutral group/*
+
+  if age_of_driver >=19 and age_of_driver <=24       then age_of_driver1 =1; else age_of_driver1 = 0;
+  if age_of_driver >=25 and age_of_vehicle <=39      then age_of_driver2 =1; else age_of_driver 2= 0;
+  if age_of_driver >=40 and age_of_vehicle <=51      then age_of_driver3 =1; else age_of_driver 3= 0;
+  if age_of_driver >=52 and age_of_vehicle <=69      then age_of_driver4 =1; else age_of_driver4 = 0;
+  if age_of_driver >=70 and age_of_vehicle <=80      then age_of_driver5 =1; else age_of_driver5 = 0;
+  if age_of_driver > 80 				                     then age_of_driver6 =1; else age_of_driver6 = 0;
+  if vehicle_type=1	 	                               then vehicle_type1 =1; else vehicle_type1 = 0;
+  if vehicle_type =2                                 then vehicle_type2 =1; else vehicle_type2 = 0; 
+  if vehicle_type =3                                 then vehicle_type3 = 1; else vehicle_type3 = 0; 
+  if vehicle_type =4                                 then vehicle_type4= 1; else vehicle_type4= 0; 
+  if vehicle_type= 5	 	                             then vehicle_type5 =1; else vehicle_type5 = 0;
+  if vehicle_type =8                                 then vehicle_type6 =1; else vehicle_type6 = 0; 
+  if vehicle_type =9                                 then vehicle_type7  = 1; else vehicle_type7 = 0; 
+  if vehicle_type =10                                then vehicle_type8 = 1; else vehicle_type8 = 0; 
+  if vehicle_type =11                                then vehicle_type9 =1; else vehicle_type9 = 0; 
+  if vehicle_type =16                                then vehicle_type10  = 1; else vehicle_type10 = 0; 
+  if vehicle_type =17                                then vehicle_type11 = 1; else vehicle_type11 = 0; 
+  if vehicle_type =19                                then vehicle_type12 =1; else vehicle_type12= 0; 
+  if vehicle_type =20                                then vehicle_type13  = 1; else vehicle_type13 = 0; 
+  if vehicle_type =21                                then vehicle_type14 = 1; else vehicle_type14 = 0; 
+  if vehicle_type =22                                then vehicle_type15=1; else vehicle_type15 = 0; 
+  if vehicle_type =90                                then vehicle_type16  = 1; else vehicle_type16 = 0; 
+  if vehicle_type =97                                then vehicle_type17  = 1; else vehicle_type17 = 0; 
+  if vehicle_type =98                                then vehicle_type18 = 1; else vehicle_type18 = 0;
+  if speed_limit >=40 and speed_limit <=50           then age_of_driver1 =1; else age_of_driver 1= 0;
+  if speed_limit >=60 and speed_limit <=70           then age_of_driver2 =1; else age_of_driver 2= 0;
+  run;
+quit;
+
+
+
+PROC PRINT data=save.train2 (obs=10);
+  var 
+  junction_control   junction_control1-- junction_control4
+  age_of_driver       age_of_driver1-- age_of_driver6
+  age_of_vehicle   age_of_vehicle1-- age_of_vehicle4
+  vehicle_type 	 vehicle_type1— vehicle_type18
+  speed_limit   	speed_limit  1-- speed_limit 2; 
+  format _all_;
+run;
+
+Running Regression Analysis
+
+The following program runs the regression and stores the estimates in a file called estfile. 
+proc reg data=save.train2 outest=estfile;
+  bgscore: model Good = 
+  vjobmos1—vjobmos6
+  ageotd1--ageotd4
+  vage1—vage4
+  ageavg1—ageavg3
+  BROLDT1— BROLDT2   
+  ;
+run;
+
+/*Note: Run the regression with all the dummies for all the variables together. Do not run separate regressions for each variable!*/
+*_____________________________________________________________________;
+Scoring (predicting) in SAS
+
+The following will score the and save the output in save.scrtrain. The following score program must be repeated for the validation dataset. Be careful, however, to run the regression on the training set only! The model is built on the training set, and tested on both training and validation sets. 
+
+proc score data=save.train2 score=estfile type=parms out=save.scrtrain;
+  var 
+  vjobmos1—vjobmos6
+  ageotd1--ageotd4
+  vage1—vage4
+  ageavg1—ageavg3
+  BROLDT1— BROLDT2   
+  run;
+quit;
+
+Add this format to the format.sas program and run it.
+VALUE bgscore
+     0-.05='0 to 50'       .05<-.10='51 to 100'
+   .10<-.15='101 to 150'   .15<-.20='151 to 200'
+   .20<-.25='201 to 250'   .25<-.30='251 to 300'
+   .30<-.35='301 TO 350'   .35<-.40='351 TO 400'
+   .40<-.45='401 TO 450'   .45<-.50='451 TO 500'
+   .50<-.55='501 TO 550'   .55<-.60='551 TO 600'
+   .60<-.65='601 TO 650'   .65<-.70='651 TO 700'
+   .70<-.75='701 TO 750'   .75<-.80='751 TO 800'
+   .80<-.85='801 TO 850'   .85<-.90='851 TO 900'
+   .90<-.95='901 TO 950'   .95<-1.00='951 TO 1000'
+   1.00<-HIGH='OVER 1000'
+;
+
+/*print a crosstab of the scores (predictions) against the real Good/Bad values from the sample. Use Proc Freq to do so. This will help assess how well the predictions are able to match reality. */
+
+
+proc freq data=save.scrtrain;
+  tables bgscore*good;
+  format bgscore bgscore. ;
+run;
+
+
+
